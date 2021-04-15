@@ -6,7 +6,7 @@ import json
 import glob
 
 serverName = 'localhost'
-serverPort = 12000
+serverPort = 5001
 
 content_name = input('Enter file name:')  # This'll be the parameter you provide for this code. The name of the content that the user wants to download.
 filename = content_name+'.png'
@@ -50,8 +50,9 @@ server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 server.settimeout(0.2)
 
 # message = b"your very important message"
-while True:
-    server.sendto(filesJson, (serverName, serverPort))
-    print("message sent!")
-    time.sleep(60)
+
+# while True:
+#     server.sendto(filesJson, (serverName, serverPort))
+#     print("message sent!")
+#     time.sleep(60)
 
