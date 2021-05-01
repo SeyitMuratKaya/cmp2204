@@ -51,8 +51,8 @@ server.settimeout(0.2)
 
 # message = b"your very important message"
 
-# while True:
-#     server.sendto(filesJson, (serverName, serverPort))
-#     print("message sent!")
-#     time.sleep(60)
+while True:
+    server.sendto(filesJson, (serverName, serverPort))
+    print("message sent!")
+    time.sleep(60)
 
