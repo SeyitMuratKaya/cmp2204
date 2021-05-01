@@ -52,7 +52,7 @@ server.settimeout(0.2)
 # message = b"your very important message"
 
 while True:
-    server.sendto(filesJson, (serverName, serverPort))
+    server.sendto(filesJson.encode('utf-8'), ('255.255.255.255', serverPort))
     print("message sent!")
-    time.sleep(60)
+    time.sleep(10)
 
