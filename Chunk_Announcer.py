@@ -5,7 +5,6 @@ import time
 import json
 import glob
 
-serverName = 'localhost'
 serverPort = 5001
 
 content_name = input('Enter file name:')  # This'll be the parameter you provide for this code. The name of the content that the user wants to download.
@@ -32,7 +31,7 @@ print("Content seperated to 5 chunks")
 files = {
     "chunk":[]
 }
-path = '*' + '[1-5]'
+path = content_name + '_' + '[1-5]'
 chunks = glob.glob(path)
 
 for i in chunks:
@@ -44,7 +43,8 @@ print(filesJson)
 
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
 
-server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+# server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
 server.settimeout(0.2)
