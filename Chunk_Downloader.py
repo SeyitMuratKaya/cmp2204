@@ -8,13 +8,14 @@ requestedFile = input("Which file you want to download ?")
 contentFile =  open('contents.txt','r')
 
 lookupJson = contentFile.read()
+contentFile.close()
 
 lookupDictionary = json.loads(lookupJson)
 
 for i in range(1,6):
     chunk = requestedFile + '_' + str(i)
     if chunk in lookupDictionary:
-        print(lookupDictionary[chunk][0])
+        # print(lookupDictionary[chunk][0])
         serverName = lookupDictionary[chunk][0]
         serverPort = 8000
         clientSocket.connect((serverName,serverPort))
@@ -23,8 +24,8 @@ for i in range(1,6):
         }
         requestJson = json.dumps(request)
         clientSocket.send(requestJson.encode('utf-8'))
-
-
     else:
         print('chunk '+ chunk + ' does not exist')
+        
+    clientSocket.close()
 
