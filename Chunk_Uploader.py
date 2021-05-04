@@ -8,27 +8,30 @@ serverSocket.listen(5)
 
 print('The server is ready to receive')
 
-while 1:
-    connectionSocket, addr = serverSocket.accept()
-    print("connected")
-
-    requestJson = connectionSocket.recv(1024)
-    request = json.loads(requestJson)
-
-    openFile = open(request["requested_content"],'rb')
-    print(request["requested_content"])
-    requestedChunk = openFile.read(1024)
-    
-    while (requestedChunk):
-        connectionSocket.send(requestedChunk)
-        print("file sended")
-        requestedChunk = openFile.read(1024)
-    openfile.close()
+connection , addr = serverSocket.accept()
 
 
-    print("file sended")
-    connectionSocket.close()
-    
-    # print(requestedChunk)
-    # connectionSocket.send(requestedChunk.encode('utf-8'))
-    # connectionSocket.close()
+print("waiting for request")
+requestJson =  connection.recv(4096).decode()
+print("requiest received")
+
+requestedFile = json.loads(requestJson)
+
+
+filename = requestedFile['requested_content']
+
+with open(filename,'rb') as file:
+    while True:
+        bytes_read = file.read(4096)
+        if not bytes_read:
+            break
+        connection.sendall(bytes_read)
+
+
+print("file sended")
+
+        
+
+
+
+
