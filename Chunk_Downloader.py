@@ -4,10 +4,6 @@ import json
 serverName = 'localhost'
 serverPort = 8000
 
-clientSocket = socket(AF_INET, SOCK_STREAM)
-
-clientSocket.connect((serverName,serverPort))
-
 requestedFile = input("Enter file name ")
 
 contentFile = open("contents.txt",'r')
@@ -17,24 +13,32 @@ contentFile.close()
 
 lookupDictionary = json.loads(lookupJson)
 
+for i in range(1,6):
 
-chunk = requestedFile + '_' + str(1) 
+    clientSocket = socket(AF_INET, SOCK_STREAM)
 
-request = {
-    "requested_content": chunk
-}
-requestJson = json.dumps(request)
+    clientSocket.connect((serverName,serverPort))
+    
+    print(i)
+    chunk = requestedFile + '_' + str(i) 
 
-clientSocket.send(requestJson.encode())
-print("request sended")
+    request = {
+        "requested_content": chunk
+    }
+    requestJson = json.dumps(request)
 
-with open('./rec/file'+str(1), "wb") as f:
-    while True:
-        bytes_read = clientSocket.recv(4096)
-        print(len(bytes_read))
-        if not bytes_read:
-            break
-        f.write(bytes_read)
-print("file received")
+    clientSocket.send(requestJson.encode())
+    print("request sended")
+
+    with open('./rec/file'+"_"+str(i), "wb") as f:
+        while True:
+            bytes_read = clientSocket.recv(4096)
+            print(len(bytes_read))
+            if len(bytes_read) <= 0:
+                break
+            f.write(bytes_read)
+    print("file received")
+
+    clientSocket.close()
 
 
