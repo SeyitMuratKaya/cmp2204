@@ -63,14 +63,10 @@ while True:
         chunknames = [content_name+'_1', content_name+'_2', content_name+'_3', content_name+'_4', content_name+'_5']
         print(chunknames)
         #with open(content_name+'.png', 'w') as outfile: 
-        with open('hello.png', 'wb') as outfile: # in your code change 'ece.png' to content_name+'.png'
+        with open("downloaded_" +requestedFile+".png", 'wb') as outfile: # in your code change 'ece.png' to content_name+'.png'
             for chunk in chunknames: 
                 with open(chunk, 'rb') as infile: 
                     outfile.write(infile.read() )
                 infile.close()
-        print("file is successfully downloaded")
-
-
-
-
+        print("file successfully downloaded")
 
