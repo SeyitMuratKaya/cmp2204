@@ -13,7 +13,7 @@ while True:
     contentFile.close()
 
     lookupDictionary = json.loads(lookupJson)
-    count = 0
+    chunkCount = 0
     for i in range(1,6):
         chunk = requestedFile + '_' + str(i)
         isChunkDownloaded = False
@@ -27,9 +27,9 @@ while True:
                 requestJson = json.dumps(request)
 
                 clientSocket.send(requestJson.encode())
-                print("request sended")
+                print(f"Request sended for {chunk}")
                 with open("downloaded_" +requestedFile+"_"+str(i), "wb") as f:
-                    count += 1
+                    chunkCount += 1
                     while True:
                         bytes_read = clientSocket.recv(4096)
                         # print(len(bytes_read))
@@ -51,22 +51,22 @@ while True:
 
             with open("download_log.txt","a") as file:
                 file.write(f"chunk {chunk} downloaded from {userIP} at {current_time} \n")
+            print(f"Chunk {chunk} downloaded")
+        
         else:
-            print(f"failed to download chunk {chunk}")
+            print(f"Failed to download chunk {chunk}")
 
 
         clientSocket.close()
 
 
-    if count == 5:
-        content_name = "downloaded_" +requestedFile  # again, this'll be the name of the content that used wanted to download from the network.
+    if chunkCount == 5:
+        content_name = "downloaded_" +requestedFile
         chunknames = [content_name+'_1', content_name+'_2', content_name+'_3', content_name+'_4', content_name+'_5']
-        print(chunknames)
-        #with open(content_name+'.png', 'w') as outfile: 
-        with open("downloaded_" +requestedFile+".png", 'wb') as outfile: # in your code change 'ece.png' to content_name+'.png'
+        with open("downloaded_" +requestedFile+".png", 'wb') as outfile:
             for chunk in chunknames: 
                 with open(chunk, 'rb') as infile: 
                     outfile.write(infile.read() )
                 infile.close()
-        print("file successfully downloaded")
+        print("File successfully downloaded")
 

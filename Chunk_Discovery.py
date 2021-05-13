@@ -12,7 +12,7 @@ print("The server is ready to receive")
 
 while True:
     message, (clientAddress,clientPort) = serverSocket.recvfrom(2048)
-    print('received {} bytes from {}'.format(len(message), clientAddress))
+    print('Received {} bytes from {}'.format(len(message), clientAddress))
     receivedChunks = json.loads(message)
 
     for i in receivedChunks['chunk']:
@@ -26,5 +26,5 @@ while True:
     contentFile.write(cfJson)
     contentFile.close()
 
-    print('\n',contentDiscovery)
+    print("Available chunks are:",'\n',contentDiscovery)
 

@@ -8,15 +8,14 @@ serverSocket = socket(AF_INET,SOCK_STREAM)
 serverSocket.bind(('',serverPort))
 serverSocket.listen(5)
 
+print('The server is ready to receive')
 
 
 while True:
-    print('The server is ready to receive')
-
     connection , (addr,port) = serverSocket.accept()
-    print(f"connection from {addr} has been established")
+    print(f"Connection from {addr} has been established")
     requestJson =  connection.recv(4096).decode()
-    print("requiest received")
+    print("Requiest received")
 
     requestedFile = json.loads(requestJson)
 
@@ -24,6 +23,7 @@ while True:
 
     with open(filename,'rb') as file:
         connection.sendall(file.read())
+    print(f"Chunk {filename} uploaded")
     
     now = datetime.now()
     current_time = now.strftime("%d/%m/%Y %H:%M:%S")
@@ -32,12 +32,3 @@ while True:
         file.write(f"chunk {filename} sended to {addr} at {current_time} \n")
 
     connection.close()
-
-
-print("file sended")
-
-        
-
-
-
-
