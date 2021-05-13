@@ -26,7 +26,7 @@ while True:
         connection.sendall(file.read())
     
     now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
+    current_time = now.strftime("%d/%m/%Y %H:%M:%S")
 
     with open("upload_log.txt","a") as file:
         file.write(f"chunk {filename} sended to {addr} at {current_time} \n")
