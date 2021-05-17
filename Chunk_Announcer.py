@@ -31,7 +31,8 @@ print("Content seperated to 5 chunks")
 files = {
     "chunk":[]
 }
-path = content_name + '_' + '[1-5]'
+# path = content_name + '_' + '[1-5]'
+path = '*' + '_' + '[1-5]'
 chunks = glob.glob(path)
 
 for i in chunks:

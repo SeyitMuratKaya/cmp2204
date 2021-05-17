@@ -16,10 +16,12 @@ while True:
     receivedChunks = json.loads(message)
 
     for i in receivedChunks['chunk']:
-        contentDiscovery[i] = []
+        if i not in contentDiscovery:
+            contentDiscovery[i] = []
 
     for i in receivedChunks['chunk']:
-        contentDiscovery[i].append(clientAddress)
+        if clientAddress not in contentDiscovery[i]:
+            contentDiscovery[i].append(clientAddress)
 
     contentFile = open("contents.txt", "w")
     cfJson = json.dumps(contentDiscovery)
