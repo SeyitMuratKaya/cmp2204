@@ -1,6 +1,9 @@
 from socket import *
 import json
+import os
 from datetime import datetime
+
+os.mkdir('./rec/')
 
 serverPort = 8000
 while True:
@@ -19,6 +22,7 @@ while True:
         isChunkDownloaded = False
         for userIP in lookupDictionary[chunk]:
             clientSocket = socket(AF_INET, SOCK_STREAM)
+            clientSocket.settimeout(5)
             try:
                 clientSocket.connect((userIP,serverPort))
                 request = {
@@ -28,7 +32,7 @@ while True:
 
                 clientSocket.send(requestJson.encode())
                 print(f"Request sended for {chunk}")
-                with open("downloaded_" +requestedFile+"_"+str(i), "wb") as f:
+                with open("./rec/"+"downloaded_" +requestedFile+"_"+str(i), "wb") as f:
                     chunkCount += 1
                     while True:
                         bytes_read = clientSocket.recv(4096)
@@ -63,9 +67,9 @@ while True:
     if chunkCount == 5:
         content_name = "downloaded_" +requestedFile
         chunknames = [content_name+'_1', content_name+'_2', content_name+'_3', content_name+'_4', content_name+'_5']
-        with open("downloaded_" +requestedFile+".png", 'wb') as outfile:
+        with open("./rec/"+"downloaded_" +requestedFile+".png", 'wb') as outfile:
             for chunk in chunknames: 
-                with open(chunk, 'rb') as infile: 
+                with open("./rec/"+chunk, 'rb') as infile: 
                     outfile.write(infile.read() )
                 infile.close()
         print("File successfully downloaded")
