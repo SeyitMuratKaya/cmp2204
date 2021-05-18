@@ -3,7 +3,8 @@ import json
 import os
 from datetime import datetime
 
-os.mkdir('./rec/')
+if not os.path.exists('./rec/'):
+    os.mkdir('./rec/')
 
 serverPort = 8000
 while True:
@@ -22,7 +23,7 @@ while True:
         isChunkDownloaded = False
         for userIP in lookupDictionary[chunk]:
             clientSocket = socket(AF_INET, SOCK_STREAM)
-            clientSocket.settimeout(5)
+            # clientSocket.settimeout(5)
             try:
                 clientSocket.connect((userIP,serverPort))
                 request = {
@@ -32,6 +33,7 @@ while True:
 
                 clientSocket.send(requestJson.encode())
                 print(f"Request sended for {chunk}")
+                print("Downloading...")
                 with open("./rec/"+"downloaded_" +requestedFile+"_"+str(i), "wb") as f:
                     chunkCount += 1
                     while True:

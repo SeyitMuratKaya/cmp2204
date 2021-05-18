@@ -20,12 +20,12 @@ while True:
     requestedFile = json.loads(requestJson)
 
     filename = requestedFile['requested_content']
-
+    print("Uploading...")
     with open(filename,'rb') as file:
-        l = file.read(1024)
+        l = file.read(4096)
         while (l):
             connection.send(l)
-            l = file.read(1024)
+            l = file.read(4096)
 
         # connection.sendall(file.read())
     print(f"Chunk {filename} uploaded")
