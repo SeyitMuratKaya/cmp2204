@@ -22,7 +22,12 @@ while True:
     filename = requestedFile['requested_content']
 
     with open(filename,'rb') as file:
-        connection.sendall(file.read())
+        l = file.read(1024)
+        while (l):
+            connection.send(l)
+            l = file.read(1024)
+
+        # connection.sendall(file.read())
     print(f"Chunk {filename} uploaded")
     
     now = datetime.now()
