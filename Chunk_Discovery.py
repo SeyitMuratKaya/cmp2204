@@ -5,12 +5,13 @@ contentDiscovery = {}
 
 serverPort = 5001
 
-serverSocket = socket(AF_INET, SOCK_DGRAM)
-
-serverSocket.bind( ('', serverPort) )
-print("The server is ready to receive")
+print("Server is ready to receive")
 
 while True:
+    serverSocket = socket(AF_INET, SOCK_DGRAM)
+
+    serverSocket.bind( ('', serverPort) )
+
     message, (clientAddress,clientPort) = serverSocket.recvfrom(2048)
     print('Received {} bytes from {}'.format(len(message), clientAddress))
     receivedChunks = json.loads(message)
@@ -29,35 +30,3 @@ while True:
     contentFile.close()
 
     print("Available chunks are:",'\n',contentDiscovery)
-
-# dic ={}
-
-# a ={
-#     "chunk":["wp_1","wp_2","wp_3","bl_1","bl_2","bl_3"]
-# }
-# b ={
-#     "chunk":["wp_1","wp_2","wp_3","bl_1","bl_2","bl_3"]
-# }
-
-# for i in a["chunk"]:
-#     if i not in dic:
-#         dic[i]=[]
-
-# for i in a["chunk"]:
-#     if "1" not in dic[i]:
-#         dic[i].append("1")
-    
-# for i in a["chunk"]:
-#     if "1" not in dic[i]:
-#         dic[i].append("1")
-
-# print(dic)
-
-# for i in a["chunk"]:
-#     if i not in dic:
-#         dic[i]=[]
-        
-# for i in a["chunk"]:
-#     dic[i].append("2")
-    
-# print(dic)
