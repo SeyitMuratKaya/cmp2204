@@ -8,7 +8,11 @@ serverPort = 5001
 print("Server is ready to receive")
 
 while True:
-    serverSocket = socket(AF_INET, SOCK_DGRAM)
+    serverSocket = socket(AF_INET, SOCK_DGRAM,IPPROTO_UDP)
+
+    # serverSocket.setsockopt(SOL_SOCKET, SO_REUSEPORT, 1)
+    # serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+    serverSocket.setsockopt(SOL_SOCKET, SO_BROADCAST, 1)
 
     serverSocket.bind( ('', serverPort) )
 
