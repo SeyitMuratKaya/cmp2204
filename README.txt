@@ -14,7 +14,3 @@ If you want to test the project run the .py files in this order:
 4-Chunk Downloader
 
 Received chunks and file are located in the rec folder.
-
-Limitations:
-
-Has issues working with Hamachi.

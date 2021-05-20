@@ -29,14 +29,14 @@ chunk_file.close()
 print("Content seperated to 5 chunks")
 
 files = {
-    "chunk":[]
+    "chunks":[]
 }
 # path = content_name + '_' + '[1-5]'
 path = '*' + '_' + '[1-5]'
 chunks = glob.glob(path)
 
 for i in chunks:
-    files["chunk"].append(i)
+    files["chunks"].append(i)
 
 filesJson = json.dumps(files)
 # print(files["chunk"])

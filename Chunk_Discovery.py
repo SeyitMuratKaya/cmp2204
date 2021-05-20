@@ -5,7 +5,7 @@ contentDiscovery = {}
 
 serverPort = 5001
 
-print("Server is ready to receive")
+print("Server is ready to discover")
 
 while True:
     serverSocket = socket(AF_INET, SOCK_DGRAM,IPPROTO_UDP)
@@ -20,11 +20,11 @@ while True:
     print('Received {} bytes from {}'.format(len(message), clientAddress))
     receivedChunks = json.loads(message)
 
-    for i in receivedChunks['chunk']:
+    for i in receivedChunks['chunks']:
         if i not in contentDiscovery:
             contentDiscovery[i] = []
 
-    for i in receivedChunks['chunk']:
+    for i in receivedChunks['chunks']:
         if clientAddress not in contentDiscovery[i]:
             contentDiscovery[i].append(clientAddress)
 

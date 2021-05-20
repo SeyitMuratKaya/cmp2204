@@ -8,7 +8,7 @@ serverSocket = socket(AF_INET,SOCK_STREAM)
 serverSocket.bind(('',serverPort))
 serverSocket.listen(5)
 
-print('The server is ready to receive')
+print('The server is ready to upload')
 
 
 while True:
