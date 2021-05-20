@@ -51,7 +51,7 @@ server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 # server.settimeout(0.2)
 
 while True:
-    server.sendto(filesJson.encode('utf-8'), ('255.255.255.255', serverPort))
+    server.sendto(filesJson.encode('utf-8'), ('25.255.255.255', serverPort))
     print("Message sent!")
     time.sleep(60)
 
