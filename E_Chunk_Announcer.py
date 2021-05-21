@@ -7,7 +7,7 @@ import glob
 
 serverPort = 5001
 
-content_name = input('Enter file name:')
+content_name = input('Enter file name without file extension: ')
 filename = content_name+'.png'
 c = os.path.getsize(filename)
 #print(c)
@@ -51,7 +51,7 @@ server.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 # server.settimeout(0.2)
 
 while True:
-    server.sendto(filesJson.encode('utf-8'), ('25.255.255.255', serverPort))
-    print("Message sent!")
+    server.sendto(filesJson.encode('utf-8'), ('255.255.255.255', serverPort))
+    print("Chunks Announced")
     time.sleep(60)
 

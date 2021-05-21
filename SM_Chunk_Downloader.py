@@ -23,7 +23,6 @@ while True:
         isChunkDownloaded = False
         for userIP in lookupDictionary[chunk]:
             clientSocket = socket(AF_INET, SOCK_STREAM)
-            # clientSocket.settimeout(5)
             try:
                 clientSocket.connect((userIP,serverPort))
                 request = {

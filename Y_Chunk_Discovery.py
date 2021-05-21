@@ -34,3 +34,5 @@ while True:
     contentFile.close()
 
     print("Available chunks are:",'\n',contentDiscovery)
+    
+    print("You can find the chunk details in contents.txt")

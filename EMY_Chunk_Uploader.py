@@ -15,9 +15,9 @@ while True:
     connection , (addr,port) = serverSocket.accept()
     print(f"Connection from {addr} has been established")
     requestJson =  connection.recv(4096).decode()
-    print("Requiest received")
 
     requestedFile = json.loads(requestJson)
+    print(f"Requiest received for {requestedFile['requested_content']}")
 
     filename = requestedFile['requested_content']
     print("Uploading...")
